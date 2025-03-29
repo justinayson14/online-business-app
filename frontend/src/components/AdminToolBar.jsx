@@ -1,11 +1,11 @@
 // components/AdminToolBar.js
 import React from "react";
 
-function AdminToolbar() {
+function AdminToolbar( { onLogout }) {
   return (
     <div style={toolbarStyles}>
       <h2>AdminToolbar</h2>
-      <button style={buttonStyles}>Logout</button>
+      <button style={buttonStyles} onClick={onLogout}> Admin Logout</button>
       <button style={buttonStyles}>Add Products</button>
       <button style={buttonStyles}>Add Franchises</button>
       <button style={buttonStyles}>Edit Product</button>

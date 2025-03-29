@@ -1,11 +1,12 @@
 // components/UserToolBar.js
 import React from "react";
 
-function UserToolbar() {
+function UserToolbar( { onLogout }) {
   return (
     <div style={toolbarStyles}>
       <h2>UserToolbar</h2>
-      <button style={buttonStyles}>Logout</button>
+      <button style={buttonStyles} onClick={onLogout}>User Logout</button>
+
       <button style={buttonStyles}>View Cart/Checkout</button>
     </div>
   );

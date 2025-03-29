@@ -1,11 +1,13 @@
 // components/LoginToolBar.js
 import React from "react";
 
-function LoginToolbar() {
+function LoginToolbar({ onLoginUser, onLoginAdmin }) {
   return (
     <div style={toolbarStyles}>
       <h2>LoginToolbar</h2>
-      <button style={buttonStyles}>Login</button>
+      <button style={buttonStyles} onClick={onLoginUser}>User Login</button>
+      <button style={buttonStyles} onClick={onLoginAdmin}>Admin Login</button>
+
     </div>
   );
 }
