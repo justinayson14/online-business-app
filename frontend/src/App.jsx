@@ -1,11 +1,16 @@
-import "./App.css";
-import ProductCard from "./components/ProductCard";
+import "./styles/App.css";
+import Home from "./pages/Home";
+import {Routes, Route} from "react-router-dom";
+import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
   return (
-    <>
-      <ProductCard product={{name: "Keyboard", cost:"$20"}}/>
-    </>
+    <main className="main-content">
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/cart" element={<ShoppingCart />}/>
+      </Routes>
+    </main>
   );
 }
 
