@@ -1,13 +1,31 @@
+/* eslint-disable no-unused-vars */
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getProducts } from "../services/api";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const products = [
-    { id: 1, name: "Keyboard", price: "$20" },
-    { id: 2, name: "Mouse", price: "$10" },
-  ];
+  useEffect(() => {
+    const loadAllProducts = async () => {
+      try {
+        const allProducts = await getProducts()
+        setProducts(allProducts)
+      } catch (err) {
+        console.log(err)
+        setError("Failed to load products...")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadAllProducts();
+  }, [])
+
+
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -32,9 +50,7 @@ function Home() {
       <div className="products-grid">
         {products.map(
           (product) =>
-            (
-              <ProductCard product={product} />
-            )
+            <ProductCard product={product} />
         )}
       </div>
     </div>

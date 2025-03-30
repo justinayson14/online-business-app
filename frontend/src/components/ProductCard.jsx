@@ -6,7 +6,7 @@ function ProductCard({product}) {
 
     return <div className="product-card">
         <div className="product-image">
-            <img src={product.url} alt={product.name} />
+            <img src={null} alt={product.name} />
             <div className="product-overlay">
                 <button className="toCart-btn" onClick={onToCartClick}>
                     +
@@ -15,7 +15,7 @@ function ProductCard({product}) {
         </div>
         <div className="product-info">
             <h3>{product.name}</h3>
-            <p>{product.cost}</p>
+            <p>{product.price}</p>
         </div>
     </div>
 }
