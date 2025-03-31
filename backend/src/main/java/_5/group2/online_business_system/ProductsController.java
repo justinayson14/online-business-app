@@ -27,7 +27,7 @@ public class ProductsController {
     }*/
 
     @GetMapping("/search")
-    public ResponseEntity<Optional<Products>> getSingleProductByName(@RequestParam("name") String name) {
-        return new ResponseEntity<Optional<Products>>(productsService.singleProductByName(name), HttpStatus.OK);
+    public ResponseEntity<List<Products>> getSingleProductByName(@RequestParam("name") String name) {
+        return new ResponseEntity<List<Products>>(productsService.searchProductByName(name), HttpStatus.OK);
     }
 }

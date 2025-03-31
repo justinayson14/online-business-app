@@ -24,8 +24,10 @@ public class ProductsService {
         return productsRepository.findById(id);
     }
 
-    public Optional<Products> singleProductByName(String name) {
-        return productsRepository.findProductsByName(name);
+    public List<Products> searchProductByName(String name) {
+        if (name == null || name.trim().isEmpty())
+            return productsRepository.findAll();
+        return productsRepository.findProductsByNameContainingIgnoreCase(name);
     }
 
 }
