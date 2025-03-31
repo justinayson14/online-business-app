@@ -1,23 +1,34 @@
+/* eslint-disable no-unused-vars */
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
 function ProductCard({product}) {
 
     function onToCartClick() {
         alert("clicked")
     }
 
-    return <div className="product-card">
-        <div className="product-image">
-            <img src={null} alt={product.name} />
-            <div className="product-overlay">
-                <button className="toCart-btn" onClick={onToCartClick}>
-                    +
-                </button>
-            </div>
-        </div>
-        <div className="product-info">
-            <h3>{product.name}</h3>
-            <p>{product.price}</p>
-        </div>
-    </div>
+    return (
+        <Card sx={{ width: 200 }}>
+        <CardMedia
+          sx={{ height: 140}}
+          image={product.image}
+          title={product.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {product.name}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Add to cart</Button>
+        </CardActions>
+      </Card>
+    );
 }
 
 export default ProductCard

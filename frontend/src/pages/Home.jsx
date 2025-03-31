@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import ProductCard from "../components/ProductCard";
+import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 import { getProducts } from "../services/api";
+import { Grid, Container, Stack } from "@mui/material";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,20 +14,18 @@ function Home() {
   useEffect(() => {
     const loadAllProducts = async () => {
       try {
-        const allProducts = await getProducts()
-        setProducts(allProducts)
+        const allProducts = await getProducts();
+        setProducts(allProducts);
       } catch (err) {
-        console.log(err)
-        setError("Failed to load products...")
+        console.log(err);
+        setError("Failed to load products...");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     loadAllProducts();
-  }, [])
-
-
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -34,26 +34,18 @@ function Home() {
   };
 
   return (
-    <div className="home">
-      <form onSubmit={handleSearch} className="search-form">
-        <input
-          type="text"
-          placeholder="Search products..."
-          className="search-input"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </form>
-      <div className="products-grid">
-        {products.map(
-          (product) =>
-            <ProductCard product={product} />
-        )}
-      </div>
-    </div>
+    <Container className="home">
+      <Stack spacing={2}>
+        <SearchBar setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>
+        <Grid container className="product-grid" spacing={2}>
+          {products.map((product) => (
+            <Grid key={product.id.timestamp}>
+              <ProductCard product={product} />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
+    </Container>
   );
 }
 
