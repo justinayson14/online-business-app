@@ -19,5 +19,7 @@ public class Products {
 
     private Double price;
 
+    private String image;
+
 
 }
