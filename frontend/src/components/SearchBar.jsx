@@ -2,12 +2,15 @@ import { TextField, IconButton, InputAdornment } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = ({ setSearchQuery, handleSearch }) => (
-  <form onSubmit={handleSearch}>
+  <form onSubmit={(e) => {
+    e.preventDefault()
+    handleSearch(e)
+  }}>
     <TextField
       id="search-bar"
       className="text"
       onInput={(e) => {
-        e.preventDefault;
+        e.preventDefault();
         setSearchQuery(e.target.value);
       }}
       variant="outlined"

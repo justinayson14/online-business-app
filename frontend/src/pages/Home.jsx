@@ -2,7 +2,7 @@
 import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
-import { getProducts } from "../services/api";
+import { getProducts, searchProducts } from "../services/api";
 import { Grid, Container, Stack } from "@mui/material";
 import Navbar from "../components/NavBar";
 import LoginModal from "../components/LoginModal";
@@ -30,13 +30,24 @@ function Home() {
     loadAllProducts();
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    alert(searchQuery);
-    setSearchQuery("");
+    if (loading) return
+
+    setLoading(true)
+    try {
+      const searchResults = await searchProducts(searchQuery)
+      setProducts(searchResults)
+      setError(null)
+    } catch (err) {
+      console.log(err)
+      setError("Failed to search product...")
+    } finally {
+      setLoading(false)
+    }
   };
 
-  const handleLoginClick = () => {
+  const handleLoginClick = (e) => {
     if (showLoginModal)
       setShowLoginModal(false)
     else
@@ -48,6 +59,7 @@ function Home() {
       <Stack spacing={6}>
         <Navbar setSearchQuery={setSearchQuery} handleSearch={handleSearch} handleLoginClick={handleLoginClick}></Navbar>
         {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal}/>}
+        {error && <div className="error-message">{error}</div>}
         <Grid container className="product-grid" spacing={2}>
           {products.map((product) => (
             <Grid key={product.id.timestamp}>
