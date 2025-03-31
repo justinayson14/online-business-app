@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import LoginModal from "./components/LoginModal";
 import UserToolbar from "./components/UserToolBar";
@@ -6,9 +7,10 @@ import LoginToolbar from "./components/LoginToolBar";
 import "./styles/App.css";
 import Home from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
-import ShoppingCart from "./pages/ShoppingCart";
+import WishList from "./pages/WishList";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { LoginProvider } from "./contexts/LoginContext";
 
 const darkTheme = createTheme({
   palette: {
@@ -51,33 +53,35 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <main className="main-content">
-        {userRole === "guest" && (
-          <LoginToolbar
-            onLoginUser={() => handleLoginClick("user")}
-            onLoginAdmin={() => handleLoginClick("admin")}
-          />
-        )}
-        {userRole === "admin" && (
-          <AdminToolbar onLogout={() => setUserRole("guest")} />
-        )}
-        {userRole === "user" && (
-          <UserToolbar onLogout={() => setUserRole("guest")} />
-        )}
-        {/* Show login modal if needed */}
-        {showLoginModal && (
-          <LoginModal
-            type={loginType}
-            onClose={() => setShowLoginModal(false)}
-            onSubmit={handleLoginSubmit}
-          />
-        )}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<ShoppingCart />} />
-        </Routes>
-      </main>
+      <LoginProvider>
+        <CssBaseline />
+        <main className="main-content">
+          {/* {userRole === "guest" && (
+            <LoginToolbar
+              onLoginUser={() => handleLoginClick("user")}
+              onLoginAdmin={() => handleLoginClick("admin")}
+            />
+          )}
+          {userRole === "admin" && (
+            <AdminToolbar onLogout={() => setUserRole("guest")} />
+          )}
+          {userRole === "user" && (
+            <UserToolbar onLogout={() => setUserRole("guest")} />
+          )} */}
+          {/* Show login modal if needed */}
+          {/* {showLoginModal && (
+            <LoginModal
+              type={loginType}
+              onClose={() => setShowLoginModal(false)}
+              onSubmit={handleLoginSubmit}
+            />
+          )} */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/list" element={<WishList />} />
+          </Routes>
+        </main>
+      </LoginProvider>
     </ThemeProvider>
   );
 }

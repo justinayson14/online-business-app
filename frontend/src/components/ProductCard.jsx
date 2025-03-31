@@ -25,7 +25,7 @@ function ProductCard({product}) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Add to cart</Button>
+          <Button size="small">Add to list</Button>
         </CardActions>
       </Card>
     );

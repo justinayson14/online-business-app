@@ -4,12 +4,15 @@ import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 import { getProducts } from "../services/api";
 import { Grid, Container, Stack } from "@mui/material";
+import Navbar from "../components/NavBar";
+import LoginModal from "../components/LoginModal";
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     const loadAllProducts = async () => {
@@ -33,10 +36,18 @@ function Home() {
     setSearchQuery("");
   };
 
+  const handleLoginClick = () => {
+    if (showLoginModal)
+      setShowLoginModal(false)
+    else
+      setShowLoginModal(true)
+  }
+
   return (
     <Container className="home">
-      <Stack spacing={2}>
-        <SearchBar setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>
+      <Stack spacing={6}>
+        <Navbar setSearchQuery={setSearchQuery} handleSearch={handleSearch} handleLoginClick={handleLoginClick}></Navbar>
+        {showLoginModal && <LoginModal setShowLoginModal={setShowLoginModal}/>}
         <Grid container className="product-grid" spacing={2}>
           {products.map((product) => (
             <Grid key={product.id.timestamp}>

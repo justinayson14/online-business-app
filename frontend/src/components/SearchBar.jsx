@@ -1,8 +1,8 @@
-import { TextField, IconButton } from "@mui/material";
+import { TextField, IconButton, InputAdornment } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = ({ setSearchQuery, handleSearch }) => (
-  <form>
+  <form onSubmit={handleSearch}>
     <TextField
       id="search-bar"
       className="text"
@@ -10,14 +10,19 @@ const SearchBar = ({ setSearchQuery, handleSearch }) => (
         e.preventDefault;
         setSearchQuery(e.target.value);
       }}
-      label="Enter a product name..."
       variant="outlined"
       placeholder="Search product..."
       size="small"
+      slotProps={{
+        input:{
+            startAdornment: (
+                <InputAdornment position="start">
+                    <SearchIcon />
+                </InputAdornment>
+            ),
+        },
+      }}
     />
-    <IconButton type="submit" aria-label="serach" onClick={handleSearch}>
-        <SearchIcon/>
-    </IconButton>
   </form>
 );
 
