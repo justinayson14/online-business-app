@@ -1,29 +1,42 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const ListContext = createContext()
 
 export const useListContext = () => useContext(ListContext)
 
 export const ListProvider = ({children}) => {
-    const [status, setStatus] = useState(null)
+    const [wishlist, setWishList] = useState([])
 
-    const login = (username, password) => {
-        if (username === 'admin' && password === 'adminpass')
-            setStatus('admin')
-        else if (username === 'guest' && password === 'guestpass')
-            setStatus('guest')
-        else
-            setStatus('invalid')
+    {/* Check if there is already list and parse it into JSON */}
+    useEffect(() => {
+      const storedList = localStorage.getItem("wishlist")
+      
+      if (storedList) setWishList(JSON.parse(storedList))
+    }, [])
+    
+    {/* Update what is being stored in localStorage to string  */}
+    useEffect(() => {
+        localStorage.setItem('wishlist', JSON.stringify(wishlist))
+    }, [wishlist])
+
+    const addToWishlist = (product) => {
+        {/* Take what's already in wishlist, and add new item to list */}
+        setWishList(prev => [...prev, product])
     }
 
-    const logout = () => {
-        setStatus(null)
+    const removeFromWishlist = (productName) => {
+        setWishList(prev => prev.filter(product => product.name !== productName))
+    }
+
+    const inWishlist = (productName) => {
+        return wishlist.some(product => product.name === productName)
     }
 
     const value = {
-        status,
-        login,
-        logout
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        inWishlist
     }
 
     return (

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -21,13 +22,21 @@ public class ProductsController {
         return new ResponseEntity<List<Products>>(productsService.allProducts(), HttpStatus.OK);
     }
 
-/*    @GetMapping("/search")
-    public ResponseEntity<Optional<Products>> getSingleProductById(@RequestParam("id") ObjectId id) {
-        return new ResponseEntity<Optional<Products>>(productsService.singleProductById(id), HttpStatus.OK);
-    }*/
-
     @GetMapping("/search")
     public ResponseEntity<List<Products>> getSingleProductByName(@RequestParam("name") String name) {
         return new ResponseEntity<List<Products>>(productsService.searchProductByName(name), HttpStatus.OK);
+    }
+
+    @DeleteMapping()
+    public void deleteProductByName(@RequestParam("name") String productName) {
+        productsService.deleteProductByName(productName);
+    }
+
+    @PostMapping
+    public ResponseEntity<Products> createProduct(@RequestBody Map<String, Object> payload) {
+        String name = (String) payload.get("name");
+        Double price = (Double) payload.get("price");
+        String image = (String) payload.get("image");
+        return new ResponseEntity<Products>(productsService.createProduct(name, price, image), HttpStatus.CREATED);
     }
 }

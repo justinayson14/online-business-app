@@ -20,14 +20,20 @@ public class ProductsService {
     }
 
     // Optional lets Java know it can return null (when id not found)
-    public Optional<Products> singleProductById(ObjectId id) {
-        return productsRepository.findById(id);
-    }
-
     public List<Products> searchProductByName(String name) {
         if (name == null || name.trim().isEmpty())
             return productsRepository.findAll();
         return productsRepository.findProductsByNameContainingIgnoreCase(name);
+    }
+
+    public void deleteProductByName(String name) {
+        productsRepository.deleteByName(name);
+    }
+
+    public Products createProduct(String name, Double price, String image) {
+        Products product = new Products(name, price, image);
+        productsRepository.insert(product);
+        return product;
     }
 
 }
