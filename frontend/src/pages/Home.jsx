@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import ProductCard from "../components/ProductCard";
-import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 import { getProducts, searchProducts } from "../services/api";
 import { Grid, Container, Stack } from "@mui/material";

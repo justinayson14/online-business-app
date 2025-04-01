@@ -23,7 +23,9 @@ const NavBar = ({ setSearchQuery, handleSearch, handleLoginClick }) => {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 4 }}>
-            <Typography variant="h4">LaterList</Typography>
+            <Link to="/">
+              <Typography variant="h4" sx={{color: "white"}}>LaterList</Typography>
+            </Link>
             <SearchBar
               setSearchQuery={setSearchQuery}
               handleSearch={handleSearch}
