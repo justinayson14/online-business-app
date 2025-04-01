@@ -14,6 +14,7 @@ const SearchBar = ({ setSearchQuery, handleSearch }) => (
         setSearchQuery(e.target.value);
       }}
       variant="outlined"
+      sx={{minWidth: 300}}
       placeholder="Search product..."
       size="small"
       slotProps={{

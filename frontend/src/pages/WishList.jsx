@@ -44,7 +44,7 @@ function WishList() {
           </Typography>
           <Grid container className="product-grid" spacing={2}>
             {filteredWishlist.map((product) => (
-              <Grid key={product.id.timestamp}>
+              <Grid key={product.name}>
                 <ProductCard product={product} />
               </Grid>
             ))}

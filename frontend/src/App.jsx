@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import "./styles/App.css";
 import Home from "./pages/Home";
+import Employees from "./pages/Employees";
+import Franchises from "./pages/Franchises";
 import { Routes, Route } from "react-router-dom";
 import WishList from "./pages/WishList";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -24,6 +26,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/list" element={<WishList />} />
+              <Route path="/employees" element={<Employees />} />
+              <Route path="/franchises" element={<Franchises />} />
             </Routes>
           </main>
         </LoginProvider>

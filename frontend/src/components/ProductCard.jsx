@@ -7,8 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useListContext } from "../contexts/ListContext";
 import { useLoginContext } from "../contexts/LoginContext";
+import { removeProduct } from "../services/api";
 
-function ProductCard({ product }) {
+function ProductCard({ product, reQuery, isLoading, setLoading }) {
   const { inWishlist, addToWishlist, removeFromWishlist } = useListContext();
   const { status } = useLoginContext();
   const wishlist = inWishlist(product.name);
@@ -19,8 +20,21 @@ function ProductCard({ product }) {
     else addToWishlist(product);
   }
 
+  async function handleRemoveProdClick(e) {
+    e.preventDefault();
+    setLoading(true)
+    try {
+      await removeProduct(product.name);
+      console.log(`${product.name} removed!`);
+      reQuery();
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
-    
     <Card sx={{ width: 200 }}>
       <CardMedia
         sx={{ height: 140 }}
@@ -44,6 +58,13 @@ function ProductCard({ product }) {
               Add to list
             </Button>
           )}
+        </CardActions>
+      )}
+      {status === "admin" && (
+        <CardActions>
+          <Button size="small" onClick={handleRemoveProdClick}>
+            Remove product
+          </Button>
         </CardActions>
       )}
     </Card>
