@@ -9,27 +9,27 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "products")
-@Data // takes care of getters and setters
-@AllArgsConstructor // for making constructors
-@NoArgsConstructor // for constructors that doesn't take parameters
-public class Products {
+@Document(collection = "employees")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employees {
     @Id
     private ObjectId id;
 
     @NonNull
-    @Indexed(unique = true)
     private String name;
 
     @NonNull
-    private Double price;
+    private Integer age;
 
     @NonNull
-    private String image;
+    @Indexed(unique = true)
+    private String email;
 
-    public Products(@NonNull String name, @NonNull Double price, @NonNull String image) {
+    public Employees(@NonNull String name, @NonNull Integer age, @NonNull String email) {
         this.name = name;
-        this.price = price;
-        this.image = image;
+        this.age = age;
+        this.email = email;
     }
 }
