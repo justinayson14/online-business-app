@@ -20,6 +20,11 @@ public class EmployeeController {
         return new ResponseEntity<List<Employees>>(employeesService.allEmployees(), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Employees>> getEmployeesByName(@RequestParam("name") String name) {
+        return new ResponseEntity<List<Employees>>(employeesService.searchEmployeesByName(name), HttpStatus.OK);
+    }
+
     @DeleteMapping()
     public void deleteEmployeeByEmail(@RequestParam("email") String employeeEmail) {
         employeesService.removeEmployee(employeeEmail);

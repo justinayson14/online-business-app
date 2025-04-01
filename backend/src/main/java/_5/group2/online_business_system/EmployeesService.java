@@ -12,6 +12,12 @@ public class EmployeesService {
 
     public List<Employees> allEmployees() {return employeesRepository.findAll();}
 
+    public List<Employees> searchEmployeesByName(String name) {
+        if (name == null || name.trim().isEmpty())
+            return employeesRepository.findAll();
+        return employeesRepository.findEmployeesByNameContainingIgnoreCase(name);
+    }
+
     public Employees createEmployee(String name, Integer age, String email) {
         Employees employee = new Employees(name, age, email);
         employeesRepository.insert(employee);

@@ -20,6 +20,11 @@ public class FranchisesController {
         return new ResponseEntity<List<Franchises>>(franchisesService.allFranchises(), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Franchises>> getFranchisesByName(@RequestParam("name") String name) {
+        return new ResponseEntity<List<Franchises>>(franchisesService.searchFranchisesByName(name), HttpStatus.OK);
+    }
+
     @DeleteMapping()
     public void deleteFranchiseByStreetAddress(@RequestParam("street_address") String streetAddress) {
         franchisesService.removeFranchise(streetAddress);

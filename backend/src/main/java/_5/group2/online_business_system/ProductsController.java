@@ -1,6 +1,5 @@
 package _5.group2.online_business_system;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -23,8 +21,8 @@ public class ProductsController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Products>> getSingleProductByName(@RequestParam("name") String name) {
-        return new ResponseEntity<List<Products>>(productsService.searchProductByName(name), HttpStatus.OK);
+    public ResponseEntity<List<Products>> getProductsByName(@RequestParam("name") String name) {
+        return new ResponseEntity<List<Products>>(productsService.searchProductsByName(name), HttpStatus.OK);
     }
 
     @DeleteMapping()

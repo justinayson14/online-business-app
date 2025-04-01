@@ -1,11 +1,9 @@
 package _5.group2.online_business_system;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /***
  * Holds all methods to access database
@@ -20,7 +18,7 @@ public class ProductsService {
     }
 
     // Optional lets Java know it can return null (when id not found)
-    public List<Products> searchProductByName(String name) {
+    public List<Products> searchProductsByName(String name) {
         if (name == null || name.trim().isEmpty())
             return productsRepository.findAll();
         return productsRepository.findProductsByNameContainingIgnoreCase(name);

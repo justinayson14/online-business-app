@@ -12,6 +12,12 @@ public class FranchisesService {
 
     public List<Franchises> allFranchises() {return franchisesRepository.findAll();}
 
+    public List<Franchises> searchFranchisesByName(String name) {
+        if (name == null || name.trim().isEmpty())
+            return franchisesRepository.findAll();
+        return franchisesRepository.findFranchisesByNameContainingIgnoreCase(name);
+    }
+
     public Franchises createFranchise(String name, String streetAddress, String cityState, String zipCode, String image) {
         Franchises franchise = new Franchises(streetAddress, cityState, zipCode, image, name);
         franchisesRepository.insert(franchise);
