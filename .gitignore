@@ -36,4 +36,4 @@ build/
 .env
 
 ### extra files ###
-package-lock.json
+frontend/package-lock.json
