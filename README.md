@@ -13,4 +13,5 @@ Comp 485 - Project 1 - Online Business Application
 ### Frontend
 
 1. Navigate CLI to `frontend` directory and enter `npm install`
-2.
+2. To run, enter `npm run dev`
+3. Click on the `localhost` link in terminal
