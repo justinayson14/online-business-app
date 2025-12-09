@@ -1,6 +1,6 @@
 # Online Business App
 
-Comp 485 - Project 1 - Online Business Application
+This is a full-stack web application for an online business, developed for Comp 485. It features a Java Spring Boot backend to manage business logic and a modern JavaScript frontend for the user interface.
 
 ## Getting Started
 
@@ -15,3 +15,18 @@ Comp 485 - Project 1 - Online Business Application
 1. Navigate CLI to `frontend` directory and enter `npm install`
 2. To run, enter `npm run dev`
 3. Click on the `localhost` link in terminal
+
+## Technologies Used
+
+### Backend
+
+* Java
+* Spring Boot
+* Maven
+
+### Frontend
+
+* Node.js
+* npm
+* JavaScript
+* SCSS
