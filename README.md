@@ -30,3 +30,4 @@ This is a full-stack web application for an online business, developed for Comp 
 * npm
 * JavaScript
 * SCSS
+* React
